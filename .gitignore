@@ -106,5 +106,4 @@ venv.bak/
 # PyCharm
 .idea/
 
-meal_hisab/settings.py
 !migrations/__init__.py
