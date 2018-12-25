@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'silk',
     'core',
     'accounts',
+    'meals',
 ]
 
 MIDDLEWARE = [
