@@ -78,12 +78,12 @@ DEBUG_TOOLBAR_PANELS = [
 
 INTERNAL_IPS = ['127.0.0.1']
 
-ROOT_URLCONF = 'urls'
+ROOT_URLCONF = 'meal_hisab.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'meal_hisab/templates')]
+        'DIRS': [os.path.join(BASE_DIR, 'templates')]
         ,
         'APP_DIRS': True,
         'OPTIONS': {
@@ -155,12 +155,12 @@ STATIC_URL = '/static/'
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "meal_hisab/static"),
+    os.path.join(BASE_DIR, 'static'),
 ]
 
-MEDIA_URL = 'meal_hisab/media/'
+MEDIA_URL = '/media/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'meal_hisab/media/')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 # built-in Message framework
 MESSAGE_TAGS = {
@@ -170,3 +170,7 @@ MESSAGE_TAGS = {
     messages.WARNING: 'alert-warning',
     messages.ERROR: 'alert-danger',
 }
+
+LOGIN_REDIRECT_URL = '/'
+
+AUTH_USER_MODEL = 'accounts.User'

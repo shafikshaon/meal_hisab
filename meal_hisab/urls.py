@@ -17,11 +17,13 @@ import debug_toolbar
 from django.conf.urls.static import static
 from django.urls import path, include
 
-import settings
+from meal_hisab import settings
 
 urlpatterns = [
+    path('accounts/', include('accounts.urls')),
     path('__debug__/', include(debug_toolbar.urls)),
     path('silk/', include('silk.urls', namespace='silk')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
