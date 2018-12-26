@@ -23,6 +23,7 @@ from meal_hisab import settings
 urlpatterns = [
     path('', DashboardView.as_view()),
     path('accounts/', include('accounts.urls')),
+    path('meals/', include('meals.urls')),
     path('__debug__/', include(debug_toolbar.urls)),
     path('silk/', include('silk.urls', namespace='silk')),
 ]
