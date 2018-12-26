@@ -14,8 +14,12 @@
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
     <link href="{% static 'font-awesome/css/font-awesome.css' %}" rel="stylesheet">
 
+    <!-- dataTables -->
+    <link href="{% static 'css/plugins/dataTables/datatables.min.css' %}" rel="stylesheet">
+
     <link href="{% static 'css/animate.css' %}" rel="stylesheet">
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
+
 
 </head>
 
@@ -48,7 +52,7 @@
                                 class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li><a href="#">Add Meal</a></li>
-                        <li><a href="#">Meal List</a></li>
+                        <li><a href="{% url 'meal-list' %}">Meal List</a></li>
                     </ul>
                 </li>
                 <li>
@@ -139,10 +143,37 @@
 <!-- jQuery UI -->
 <script src="{% static 'js/plugins/jquery-ui/jquery-ui.min.js' %}"></script>
 
+<!-- dataTables -->
+<script src="{% static 'js/plugins/dataTables/datatables.min.js' %}"></script>
+<script src="{% static 'js/plugins/dataTables/dataTables.bootstrap4.min.js' %}"></script>
+
 <script>
     $(document).ready(function () {
+        $('.dataTables-meal-list').DataTable({
+            pageLength: 30,
+            responsive: true,
+            "ordering": false,
+            "paging": false,
+            "info": false,
+            dom: '<"html5buttons"B>lTfgitp',
+            buttons: [
+                {extend: 'excel', title: '{{ 'Meal List - ' }}{% now 'M-Y' %}'},
+                {extend: 'pdf', title: '{{ 'Meal List - ' }}{% now 'M-Y' %}'},
+                {
+                    customize: function (win) {
+                        $(win.document.body).addClass('white-bg');
+                        $(win.document.body).css('font-size', '10px');
 
+                        $(win.document.body).find('table')
+                            .addClass('compact')
+                            .css('font-size', 'inherit');
+                    }
+                }
+            ]
+
+        });
     });
 </script>
+
 </body>
 </html>
