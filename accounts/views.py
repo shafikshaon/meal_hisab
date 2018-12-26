@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views.generic.base import View
@@ -26,3 +26,10 @@ class LoginView(View):
                 return HttpResponseRedirect('/accounts/login/')
 
         return render(request, self.template_name)
+
+
+class LogoutView(View):
+
+    def get(self, request, *args, **kwargs):
+        logout(request)
+        return HttpResponseRedirect('/accounts/login/')
