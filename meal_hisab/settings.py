@@ -173,7 +173,7 @@ MESSAGE_TAGS = {
     messages.ERROR: 'alert-danger',
 }
 
-MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
 LOGIN_REDIRECT_URL = '/'
 

@@ -45,3 +45,13 @@ class AddMealForm(forms.ModelForm):
     class Meta:
         model = Meal
         fields = ('meal_date', 'breakfast', 'lunch', 'dinner')
+
+
+class UpdateMealForm(forms.ModelForm):
+    breakfast = forms.ChoiceField(choices=BREAKFAST_MEAL_COUNT, widget=forms.Select(attrs={'class': 'form-control'}))
+    lunch = forms.ChoiceField(choices=LUNCH_DINNER_MEAL_COUNT, widget=forms.Select(attrs={'class': 'form-control'}))
+    dinner = forms.ChoiceField(choices=LUNCH_DINNER_MEAL_COUNT, widget=forms.Select(attrs={'class': 'form-control'}))
+
+    class Meta:
+        model = Meal
+        fields = ('breakfast', 'lunch', 'dinner')
