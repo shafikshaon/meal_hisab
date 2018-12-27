@@ -3,8 +3,8 @@ import datetime
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
-from django.urls import reverse
-from django.views.generic import ListView, CreateView, UpdateView
+from django.urls import reverse, reverse_lazy
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
 from meals.forms import AddMealForm, UpdateMealForm
 from meals.models import Meal
@@ -44,6 +44,13 @@ class MealUpdateView(LoginRequiredMixin, UpdateView):
         return HttpResponseRedirect(reverse('meal-update', kwargs={'pk': meal.pk}))
 
 
+class MealDeleteView(LoginRequiredMixin, DeleteView):
+    template_name = 'meals/delete.html'
+    model = Meal
+    login_url = '/accounts/login/'
+    success_url = reverse_lazy('meal-list')
+
+
 class MealListView(LoginRequiredMixin, ListView):
     template_name = 'meals/list.html'
     login_url = '/accounts/login/'
@@ -54,6 +61,6 @@ class MealListView(LoginRequiredMixin, ListView):
         context = super().get_context_data(**kwargs)
         context['object_list'] = Meal.objects \
             .select_related('user') \
-            .filter(user_id=self.request.user.pk, meal_date__month=current_month) \
+            .filter(user_id=self.request.user.pk, meal_date__month=current_month, is_deleted=False) \
             .order_by('meal_date')
         return context
