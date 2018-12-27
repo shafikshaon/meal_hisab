@@ -173,6 +173,8 @@ MESSAGE_TAGS = {
     messages.ERROR: 'alert-danger',
 }
 
+MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
+
 LOGIN_REDIRECT_URL = '/'
 
 AUTH_USER_MODEL = 'accounts.User'

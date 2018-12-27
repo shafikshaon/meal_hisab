@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}Add Meal{% endblock %}
+{% block content %}
+    <div class="wrapper wrapper-content">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox ">
+                    <div class="ibox-title">
+                        <h5>Warning</h5>
+                    </div>
+                    <div class="ibox-content table-responsive">
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+                                    <div class="alert-message">
+                                        <strong>{{ message }}</strong>
+                                    </div>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="alert alert-warning" role="alert">
+                                Today's meal already added! You can update by going <a href="{% url 'meal-list' %}">meal
+                                list</a>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

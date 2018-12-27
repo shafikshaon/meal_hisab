@@ -1,9 +1,35 @@
 import datetime
 
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView
+from django.contrib.messages.views import SuccessMessageMixin
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+from django.views.generic import ListView, CreateView
 
+from meals.forms import AddMealForm
 from meals.models import Meal
+
+
+class MealCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+    template_name = 'meals/add.html'
+    form_class = AddMealForm
+    login_url = '/accounts/login/'
+    success_message = "%(datetime.datetime.today().day)s was created successfully"
+
+    def form_valid(self, form):
+        meal = form.save(commit=False)
+        meal.user_id = self.request.user.pk
+        meal.save()
+        messages.success(self.request, 'Meal added successfully.')
+        messages.set_level(self.request, None)
+        return HttpResponseRedirect(reverse('meal-add'))
+
+    def dispatch(self, *args, **kwargs):
+        is_added_meal = Meal.objects.filter(meal_date=datetime.datetime.today(), user_id=self.request.user.pk)
+        if is_added_meal:
+            return HttpResponseRedirect(reverse('meal-warning'))
+        return super().dispatch(*args, **kwargs)
 
 
 class MealListView(LoginRequiredMixin, ListView):

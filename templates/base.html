@@ -17,6 +17,9 @@
     <!-- dataTables -->
     <link href="{% static 'css/plugins/dataTables/datatables.min.css' %}" rel="stylesheet">
 
+    <!-- datepicker -->
+    <link href="{% static 'css/plugins/datapicker/datepicker3.css' %}" rel="stylesheet">
+
     <link href="{% static 'css/animate.css' %}" rel="stylesheet">
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
 
@@ -51,7 +54,7 @@
                         <span
                                 class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a href="#">Add Meal</a></li>
+                        <li><a href="{% url 'meal-add' %}">Add Meal</a></li>
                         <li><a href="{% url 'meal-list' %}">Meal List</a></li>
                     </ul>
                 </li>
@@ -147,8 +150,21 @@
 <script src="{% static 'js/plugins/dataTables/datatables.min.js' %}"></script>
 <script src="{% static 'js/plugins/dataTables/dataTables.bootstrap4.min.js' %}"></script>
 
+<!-- Data picker -->
+<script src="{% static 'js/plugins/datapicker/bootstrap-datepicker.js' %}"></script>
+
 <script>
     $(document).ready(function () {
+        $('#data_1 .input-group.date').datepicker({
+            calendarWeeks: true,
+            todayBtn: "linked",
+            keyboardNavigation: false,
+            forceParse: false,
+            autoclose: true,
+            format: "yyyy-mm-dd"
+        });
+
+        {#dataTables#}
         $('.dataTables-meal-list').DataTable({
             pageLength: 30,
             responsive: true,
