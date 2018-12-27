@@ -3137,7 +3137,8 @@ table.dataTable thead .sorting_desc_disabled {
 }
 
 .html5buttons {
-    float: right;
+    float: left;
+    margin-bottom: 5px;
 }
 
 .html5buttons a {

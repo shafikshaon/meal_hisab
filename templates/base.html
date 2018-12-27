@@ -152,25 +152,15 @@
         $('.dataTables-meal-list').DataTable({
             pageLength: 30,
             responsive: true,
-            "ordering": false,
-            "paging": false,
-            "info": false,
+            ordering: false,
+            paging: false,
+            info: false,
+            searching: false,
             dom: '<"html5buttons"B>lTfgitp',
             buttons: [
-                {extend: 'excel', title: '{{ 'Meal List - ' }}{% now 'M-Y' %}'},
-                {extend: 'pdf', title: '{{ 'Meal List - ' }}{% now 'M-Y' %}'},
-                {
-                    customize: function (win) {
-                        $(win.document.body).addClass('white-bg');
-                        $(win.document.body).css('font-size', '10px');
-
-                        $(win.document.body).find('table')
-                            .addClass('compact')
-                            .css('font-size', 'inherit');
-                    }
-                }
+                {extend: 'excel', title: '{{ 'Meal List' }}'},
+                {extend: 'pdf', title: '{{ 'Meal List' }}'},
             ]
-
         });
     });
 </script>
